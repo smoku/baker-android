@@ -69,7 +69,7 @@ public class Configuration {
     /**
      * Sets the name of the cache folder to be used by the application.
      */
-    public static final String MAGAZINES_FILES_DIR = "magazines";
+    public static final String MAGAZINES_FILES_DIR = "PlakAR/content";
 
     /**
      * Key of the setting to receive notification.

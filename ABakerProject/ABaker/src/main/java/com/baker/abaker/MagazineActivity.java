@@ -95,6 +95,7 @@ public class MagazineActivity extends FragmentActivity {
     private boolean hasElapsedTime = false;
     private String metaBakerPageName = "";
     private String metaBakerPageCategory = "";
+    private boolean actionBarShown = false;
 
     private String orientation;
 
@@ -117,7 +118,9 @@ public class MagazineActivity extends FragmentActivity {
         Log.d(this.getClass().getName(), "Called onDestroy method.");
 
         WebViewFragment fragment = (WebViewFragment) webViewPagerAdapter.instantiateItem(pager, pager.getCurrentItem());
-        fragment.getWebView().destroy();
+        if (fragment != null && fragment.getWebView() != null) {
+            fragment.getWebView().destroy();
+        }
         super.onDestroy();
     }
 
@@ -129,7 +132,7 @@ public class MagazineActivity extends FragmentActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		// Remove title bar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		// Remove notification bar
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -176,6 +179,10 @@ public class MagazineActivity extends FragmentActivity {
 		}
 
         resources = getResources();
+        
+        if (getActionBar() != null) {
+        	getActionBar().hide();
+        }
 	}
 
     private void detectFirstOrLastPage() {
@@ -508,6 +515,10 @@ public class MagazineActivity extends FragmentActivity {
 
                                 MagazineActivity.this.getPager().setCurrentItem(index);
                                 view.setVisibility(View.GONE);
+                                
+                                if (getActionBar() != null) {
+                                	getActionBar().hide();
+                                }
                             } else {
 
                                 // If the file DOES NOT exist, we won't load it.
@@ -531,6 +542,30 @@ public class MagazineActivity extends FragmentActivity {
 				+ "index.html");
         viewIndex.setBackgroundColor(0x00000000);
         viewIndex.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+        viewIndex.setOnTouchListener(new View.OnTouchListener() {
+        	private float mY;
+        	
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                	mY = event.getY();
+                }
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                case MotionEvent.ACTION_CANCEL:
+                case MotionEvent.ACTION_UP: {
+                    event.setLocation(event.getX(), mY);
+                }
+                    break;
+
+                }
+
+                return false;
+            }
+        });
+
 	}
 
 	@Override
@@ -598,20 +633,35 @@ public class MagazineActivity extends FragmentActivity {
 		public boolean onDoubleTap(MotionEvent event) {
             if (isEnableDoubleTap()) {
                 doubleTap = true;
+                
+                if (getActionBar() != null) {
+                	if (actionBarShown) {
+                    	getActionBar().hide();
+                    	actionBarShown = false;
+                    } else {
+                    	getActionBar().show();
+                    	actionBarShown = true;
+                    }	
+                }
+
                 CustomWebView viewIndex = (CustomWebView) findViewById(R.id.webViewIndex);
-
-                //Disable Index Zoom
-                viewIndex.getSettings().setSupportZoom(false);
-
-                if (viewIndex.isShown()) {
-                    viewIndex.setVisibility(View.GONE);
-                } else {
-
-                    WebViewFragment fragment = (WebViewFragment) MagazineActivity.this.webViewPagerAdapter
-                            .instantiateItem(pager, pager.getCurrentItem());
-                    if (!fragment.inCustomView()) {
-                        viewIndex.setVisibility(View.VISIBLE);
-                    }
+                
+                File indexFile = new File(viewIndex.getUrl().replace("file:", ""));
+                 
+                if (indexFile.exists()) {
+	                //Disable Index Zoom
+	                viewIndex.getSettings().setSupportZoom(false);
+	
+	                if (viewIndex.isShown()) {
+	                    viewIndex.setVisibility(View.GONE);
+	                } else {
+	
+	                    WebViewFragment fragment = (WebViewFragment) MagazineActivity.this.webViewPagerAdapter
+	                            .instantiateItem(pager, pager.getCurrentItem());
+	                    if (!fragment.inCustomView()) {
+	                        viewIndex.setVisibility(View.VISIBLE);
+	                    }
+	                }
                 }
             }
 			return true;

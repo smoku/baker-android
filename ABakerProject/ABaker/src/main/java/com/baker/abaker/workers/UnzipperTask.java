@@ -7,8 +7,8 @@ import android.util.Log;
 import com.baker.abaker.client.GindMandator;
 import com.baker.abaker.settings.Configuration;
 
-import org.apache.commons.compress.archivers.ArchiveEntry;
-import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+//import org.apache.commons.compress.archivers.ArchiveEntry;
+//import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -79,51 +79,51 @@ public class UnzipperTask extends AsyncTask<String, Long, String> {
     }
 
     private void extract(final String inputFile, final String outputDir) throws IOException  {
-        FileInputStream fileInputStream = null;
-        ZipArchiveInputStream zipArchiveInputStream = null;
-        FileOutputStream fileOutputStream = null;
-        try {
-
-            Log.d(this.getClass().getName(), "Will extract " + inputFile + " to " + outputDir);
-
-            byte[] buffer = new byte[8192];
-            fileInputStream = new FileInputStream(inputFile);
-
-            // We use null as encoding.
-            zipArchiveInputStream = new ZipArchiveInputStream(fileInputStream, null, true);
-            ArchiveEntry entry;
-            while ((entry = zipArchiveInputStream.getNextEntry()) != null) {
-                Log.d(this.getClass().getName(), "Extracting entry " + entry.getName());
-                File file = new File(outputDir, entry.getName());
-                if (entry.isDirectory()) {
-                    file.mkdirs();
-                } else {
-                    file.getParentFile().mkdirs();
-                    fileOutputStream = new FileOutputStream(file);
-                    int bytesRead;
-                    while ((bytesRead = zipArchiveInputStream.read(buffer, 0, buffer.length)) != -1)
-                        fileOutputStream.write(buffer, 0, bytesRead);
-                    fileOutputStream.close();
-                    fileOutputStream = null;
-                }
-            }
-            // Delete the zip file
-            File zipFile = new File(inputFile);
-            zipFile.delete();
-
-        } finally {
-            try {
-                zipArchiveInputStream.close();
-                fileInputStream.close();
-                if (fileOutputStream != null) {
-                    fileOutputStream.close();
-                }
-            } catch (NullPointerException ex) {
-                Log.e(this.getClass().getName(), "Error closing the file streams.", ex);
-            } catch (IOException ex) {
-                Log.e(this.getClass().getName(), "Error closing the file streams.", ex);
-            }
-        }
+//        FileInputStream fileInputStream = null;
+//        ZipArchiveInputStream zipArchiveInputStream = null;
+//        FileOutputStream fileOutputStream = null;
+//        try {
+//
+//            Log.d(this.getClass().getName(), "Will extract " + inputFile + " to " + outputDir);
+//
+//            byte[] buffer = new byte[8192];
+//            fileInputStream = new FileInputStream(inputFile);
+//
+//            // We use null as encoding.
+//            zipArchiveInputStream = new ZipArchiveInputStream(fileInputStream, null, true);
+//            ArchiveEntry entry;
+//            while ((entry = zipArchiveInputStream.getNextEntry()) != null) {
+//                Log.d(this.getClass().getName(), "Extracting entry " + entry.getName());
+//                File file = new File(outputDir, entry.getName());
+//                if (entry.isDirectory()) {
+//                    file.mkdirs();
+//                } else {
+//                    file.getParentFile().mkdirs();
+//                    fileOutputStream = new FileOutputStream(file);
+//                    int bytesRead;
+//                    while ((bytesRead = zipArchiveInputStream.read(buffer, 0, buffer.length)) != -1)
+//                        fileOutputStream.write(buffer, 0, bytesRead);
+//                    fileOutputStream.close();
+//                    fileOutputStream = null;
+//                }
+//            }
+//            // Delete the zip file
+//            File zipFile = new File(inputFile);
+//            zipFile.delete();
+//
+//        } finally {
+//            try {
+//                zipArchiveInputStream.close();
+//                fileInputStream.close();
+//                if (fileOutputStream != null) {
+//                    fileOutputStream.close();
+//                }
+//            } catch (NullPointerException ex) {
+//                Log.e(this.getClass().getName(), "Error closing the file streams.", ex);
+//            } catch (IOException ex) {
+//                Log.e(this.getClass().getName(), "Error closing the file streams.", ex);
+//            }
+//        }
     }
 
     @Override

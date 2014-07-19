@@ -19,9 +19,9 @@ package com.baker.abaker;
 import android.app.Application;
 import android.util.Log;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+//import com.google.android.gms.analytics.GoogleAnalytics;
+//import com.google.android.gms.analytics.HitBuilders;
+//import com.google.android.gms.analytics.Tracker;
 
 import java.util.HashMap;
 
@@ -31,7 +31,7 @@ public class ABakerApp extends Application implements AnalyticsEvents {
         GLOBAL_TRACKER
     }
 
-    HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
+//    HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
 
     public ABakerApp() {
         super();
@@ -39,37 +39,37 @@ public class ABakerApp extends Application implements AnalyticsEvents {
 
     @Override
     public void sendEvent(String category, String action, String label) {
-        Tracker tracker = this.getTracker(TrackerName.GLOBAL_TRACKER);
+//        Tracker tracker = this.getTracker(TrackerName.GLOBAL_TRACKER);
 
-        Log.d(this.getClass().getName(), "Sending event to Google Analytics with Category: "
-                + category
-                + ", Action: " + action
-                + ", Label: " + label);
+//        Log.d(this.getClass().getName(), "Sending event to Google Analytics with Category: "
+//                + category
+//                + ", Action: " + action
+//                + ", Label: " + label);
 
-        tracker.send(new HitBuilders.EventBuilder()
-                .setCategory(category)
-                .setAction(action)
-                .setLabel(label)
-                .build());
+//        tracker.send(new HitBuilders.EventBuilder()
+//                .setCategory(category)
+//                .setAction(action)
+//                .setLabel(label)
+//                .build());
     }
 
     @Override
     public void sendTimingEvent(String category, long value, String name, String label) {
-        Tracker tracker = this.getTracker(TrackerName.GLOBAL_TRACKER);
+//        Tracker tracker = this.getTracker(TrackerName.GLOBAL_TRACKER);
 
-        Log.d(this.getClass().getName(), "Sending user timing event to Google Analytics with Category: "
-                + category
-                + ", Value: " + value
-                + ", Name: " + name
-                + ", Label: " + label);
-
-        // Build and send timing.
-        tracker.send(new HitBuilders.TimingBuilder()
-                .setCategory(category)
-                .setValue(value)
-                .setVariable(name)
-                .setLabel(label)
-                .build());
+//        Log.d(this.getClass().getName(), "Sending user timing event to Google Analytics with Category: "
+//                + category
+//                + ", Value: " + value
+//                + ", Name: " + name
+//                + ", Label: " + label);
+//
+//        // Build and send timing.
+//        tracker.send(new HitBuilders.TimingBuilder()
+//                .setCategory(category)
+//                .setValue(value)
+//                .setVariable(name)
+//                .setLabel(label)
+//                .build());
     }
 
     /**
@@ -78,15 +78,15 @@ public class ABakerApp extends Application implements AnalyticsEvents {
      * @param trackerId the name of tracker, in case others are added.
      * @return Tracker the Tracker.
      */
-    synchronized Tracker getTracker(TrackerName trackerId) {
-        if (!mTrackers.containsKey(trackerId)) {
-
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            Tracker tracker = (trackerId == TrackerName.GLOBAL_TRACKER) ? analytics.newTracker(R.xml.global_tracker)
-                    : null;
-            mTrackers.put(trackerId, tracker);
-
-        }
-        return mTrackers.get(trackerId);
-    }
+//    synchronized Tracker getTracker(TrackerName trackerId) {
+//        if (!mTrackers.containsKey(trackerId)) {
+//
+//            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+//            Tracker tracker = (trackerId == TrackerName.GLOBAL_TRACKER) ? analytics.newTracker(R.xml.global_tracker)
+//                    : null;
+//            mTrackers.put(trackerId, tracker);
+//
+//        }
+//        return mTrackers.get(trackerId);
+//    }
 }

@@ -27,8 +27,9 @@
     <com.baker.abaker.views.CustomWebView
         android:id="@+id/webViewIndex"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_gravity="left|bottom"
+        android:scrollbars="horizontal"
         android:visibility="gone" />
 
     <FrameLayout

@@ -67,10 +67,10 @@ import com.baker.abaker.views.MagazineThumb;
 import com.baker.abaker.workers.BookJsonParserTask;
 import com.baker.abaker.workers.CheckInternetTask;
 import com.baker.abaker.workers.DownloaderTask;
-import com.baker.abaker.workers.GCMRegistrationWorker;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
+//import com.baker.abaker.workers.GCMRegistrationWorker;
+//import com.google.android.gms.common.ConnectionResult;
+//import com.google.android.gms.common.GooglePlayServicesUtil;
+//import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -114,7 +114,7 @@ public class GindActivity extends Activity implements GindMandator {
     private final int BOOK_JSON_PARSE_TASK = 3;
 
     // For Google Cloud Messaging
-    private GoogleCloudMessaging gcm;
+//    private GoogleCloudMessaging gcm;
     private String registrationId;
 
     // Used to auto-start download of last content if a notification is received.
@@ -194,7 +194,7 @@ public class GindActivity extends Activity implements GindMandator {
 
             if (checkPlayServices()) {
                 Log.d(this.getClass().getName(), "Google Play Services enabled.");
-                gcm = GoogleCloudMessaging.getInstance(this);
+//                gcm = GoogleCloudMessaging.getInstance(this);
                 registrationId = getRegistrationId(this.getApplicationContext());
 
                 Log.d(this.getClass().getName(), "Obtained registration ID: " + registrationId);
@@ -494,9 +494,9 @@ public class GindActivity extends Activity implements GindMandator {
     }
 
     private void registerInBackground() {
-        GCMRegistrationWorker registrationWorker = new GCMRegistrationWorker(this.getApplicationContext(),
-                this.gcm, this.REGISTRATION_TASK, this);
-        registrationWorker.execute();
+//        GCMRegistrationWorker registrationWorker = new GCMRegistrationWorker(this.getApplicationContext(),
+//                this.gcm, this.REGISTRATION_TASK, this);
+//        registrationWorker.execute();
     }
 
     /**
@@ -815,17 +815,17 @@ public class GindActivity extends Activity implements GindMandator {
     }
 
     private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-//                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
-//                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            } else {
-                Log.e(this.getClass().toString(), "This device does not support Google Play Services.");
-                finish();
-            }
-            return false;
-        }
+//        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+//        if (resultCode != ConnectionResult.SUCCESS) {
+//            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+////                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+////                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+//            } else {
+//                Log.e(this.getClass().toString(), "This device does not support Google Play Services.");
+//                finish();
+//            }
+//            return false;
+//        }
         return true;
     }
 
