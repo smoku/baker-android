@@ -30,6 +30,7 @@ package com.baker.abaker.views;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -106,6 +107,10 @@ public class WebViewFragment extends Fragment {
                     Uri uri = Uri.parse(stringUrl);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
+                } else if (stringUrl.contains("?action=")) {
+                	Intent broadcast = new Intent(Configuration.CUSTOM_ACTION);
+        			broadcast.putExtra(Configuration.CUSTOM_ACTION_URL, stringUrl);
+        			activity.sendBroadcast(broadcast);
                 } else {
                     try {
                         URL url = new URL(stringUrl);

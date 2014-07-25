@@ -57,6 +57,9 @@ public class Configuration {
     public final static String MAGAZINE_ENABLE_BACK_NEXT_BUTTONS = "com.baker.abaker.MAGAZINE_ENABLE_BACK_NEXT_BUTTONS";
     public final static String MAGAZINE_ENABLE_DOUBLE_TAP = "com.baker.abaker.MAGAZINE_ENABLE_DOUBLE_TAP";
     public final static String MAGAZINE_ENABLE_TUTORIAL = "com.baker.abaker.MAGAZINE_ENABLE_TUTORIAL";
+    
+    public final static String CUSTOM_ACTION = "com.baker.abaker.CUSTOM_ACTION";
+    public final static String CUSTOM_ACTION_URL = "com.baker.abaker.CUSTOM_ACTION_URL"; 
 
     public final static String PROPERTY_REG_ID = "com.baker.abaker.REGISTRATION_ID";
     public final static String DOWNLOAD_IN_PROGRESS = "com.baker.abaker.DOWNLOAD_ID";

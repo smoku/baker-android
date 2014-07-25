@@ -517,6 +517,7 @@ public class MagazineActivity extends FragmentActivity {
                                 view.setVisibility(View.GONE);
                                 
                                 if (getActionBar() != null) {
+                                	actionBarShown = false;
                                 	getActionBar().hide();
                                 }
                             } else {
